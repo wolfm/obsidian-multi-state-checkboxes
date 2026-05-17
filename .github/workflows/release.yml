@@ -1,0 +1,58 @@
+name: Release Obsidian plugin
+
+on:
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to release (must already exist in the repo, e.g. 0.1.0)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build plugin
+        run: npm run build
+
+      - name: Upload build artifacts to workflow run
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-build-${{ inputs.tag || github.ref_name }}
+          path: |
+            main.js
+            manifest.json
+            styles.css
+
+      # STUBBED: uncomment to publish a GitHub Release with the built assets.
+      # Until then, this workflow only validates the build (above) and uploads
+      # the assets to the workflow run (downloadable from the Actions UI).
+      # - name: Create GitHub Release
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     tag="${{ inputs.tag || github.ref_name }}"
+      #     gh release create "$tag" \
+      #       --title="$tag" \
+      #       --notes "Release $tag" \
+      #       main.js manifest.json styles.css
