@@ -1,7 +1,7 @@
 {
   "id": "multi-state-checkboxes",
   "name": "Multi-State Checkboxes",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "minAppVersion": "1.4.0",
   "description": "Switch checkboxes between customizable states via click, hotkey, or right-click menu.",
   "author": "Michael Wolf",

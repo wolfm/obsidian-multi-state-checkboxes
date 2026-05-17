@@ -1,6 +1,6 @@
 {
   "name": "multi-state-checkboxes",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Obsidian plugin for cycling checkboxes through customizable states.",
   "main": "main.js",
   "scripts": {
