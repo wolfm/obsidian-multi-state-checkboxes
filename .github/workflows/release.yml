@@ -44,15 +44,12 @@ jobs:
             manifest.json
             styles.css
 
-      # STUBBED: uncomment to publish a GitHub Release with the built assets.
-      # Until then, this workflow only validates the build (above) and uploads
-      # the assets to the workflow run (downloadable from the Actions UI).
-      # - name: Create GitHub Release
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: |
-      #     tag="${{ inputs.tag || github.ref_name }}"
-      #     gh release create "$tag" \
-      #       --title="$tag" \
-      #       --notes "Release $tag" \
-      #       main.js manifest.json styles.css
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tag="${{ inputs.tag || github.ref_name }}"
+          gh release create "$tag" \
+            --title="$tag" \
+            --notes "Release $tag" \
+            main.js manifest.json styles.css
