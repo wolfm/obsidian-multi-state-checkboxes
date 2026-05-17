@@ -13,6 +13,8 @@ on:
 
 permissions:
   contents: write
+  id-token: write
+  attestations: write
 
 jobs:
   build:
@@ -40,6 +42,14 @@ jobs:
         with:
           name: plugin-build-${{ inputs.tag || github.ref_name }}
           path: |
+            main.js
+            manifest.json
+            styles.css
+
+      - name: Generate artifact attestations
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
             main.js
             manifest.json
             styles.css
