@@ -1,0 +1,10 @@
+node_modules/
+main.js
+*.log
+.DS_Store
+data.json
+.vscode/
+.idea/
+*.tsbuildinfo
+.env
+.env.local
