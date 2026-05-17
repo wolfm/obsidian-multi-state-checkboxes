@@ -64,7 +64,7 @@ The [release workflow](.github/workflows/release.yml) auto-runs on tag push. It 
      "id": "multi-state-checkboxes",
      "name": "Multi-State Checkboxes",
      "author": "Michael Wolf",
-     "description": "Switch checkboxes between customizable states via click, hotkey, or right-click menu.",
+     "description": "Switch checkboxes between customizable statuses via click, keyboard shortcut, or context menu.",
      "repo": "wolfm/obsidian-multi-state-checkboxes"
    }
    ```

@@ -3,7 +3,7 @@
   "name": "Multi-State Checkboxes",
   "version": "1.0.0",
   "minAppVersion": "1.4.0",
-  "description": "Switch checkboxes between customizable states via click, hotkey, or right-click menu.",
+  "description": "Switch checkboxes between customizable statuses via click, keyboard shortcut, or context menu.",
   "author": "Michael Wolf",
   "authorUrl": "https://github.com/wolfm",
   "isDesktopOnly": true

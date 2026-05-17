@@ -1,15 +1,15 @@
 # Checkbox States
 
-Switch Obsidian checkboxes between customizable states via click, hotkey, or right-click menu.
+Switch Obsidian checkboxes between customizable statuses via click, keyboard shortcut, or context menu.
 
 ## Features
 
-- Define your list of checkbox states (e.g. `[ ]` not started, `[/]` in progress, `[x]` complete, `[-]` cancelled).
+- Define your list of checkbox statuses (e.g. `[ ]` not started, `[/]` in progress, `[x]` complete, `[-]` cancelled).
 - Customize how your editor cycles between them.
-- Transition between checkbox states on click:
-  - **Left-click** to cycle to the next state.
-  - **Right-click** to pick a state from the context menu.
-- Define hotkeys using the provided editor commands:
+- Transition between checkbox statuses on click:
+  - **Left-click** to cycle to the next status.
+  - **Right-click** to pick a status from the context menu.
+- Define keyboard shortcuts using the provided editor commands:
   - **Cycle to next status**
   - **Cycle to previous status**
   - **Set status: …** (one command per defined status)
