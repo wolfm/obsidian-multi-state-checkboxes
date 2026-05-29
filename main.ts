@@ -376,6 +376,13 @@ export default class CheckboxStatesPlugin extends Plugin {
    * Live preview runs a CodeMirror editor, so we can map the DOM node directly
    * to a source position via `editorView.posAtDOM` and edit through the live
    * editor — both unavailable in reading mode.
+   *
+   * We dispatch the change directly through the CodeMirror `EditorView` rather
+   * than via `editor.replaceRange`. Obsidian's wrapper sets `scrollIntoView` on
+   * the transaction, which scrolls to the editor's cursor — not the edit site.
+   * If the user's cursor is parked off-screen when they click a checkbox, that
+   * jumps the viewport away from the click. A direct dispatch leaves scroll
+   * untouched.
    */
   private applyAtCheckboxInLivePreviewMode(
     view: MarkdownView,
@@ -392,16 +399,17 @@ export default class CheckboxStatesPlugin extends Plugin {
     }
 
     const docLine = editorView.state.doc.lineAt(pos);
-    const lineNum = docLine.number - 1;
-    const lineText = view.editor.getLine(lineNum);
-    const charPos = getLineCheckboxStatusCharPos(lineText);
+    const charPos = getLineCheckboxStatusCharPos(docLine.text);
     if (charPos === null) return;
 
-    const currentChar = lineText[charPos];
+    const currentChar = docLine.text[charPos];
     const newChar = transform(currentChar);
     if (newChar === currentChar) return;
 
-    view.editor.replaceRange(newChar, { line: lineNum, ch: charPos }, { line: lineNum, ch: charPos + 1 });
+    const charDocPos = docLine.from + charPos;
+    editorView.dispatch({
+      changes: { from: charDocPos, to: charDocPos + 1, insert: newChar },
+    });
   }
 
   /**
